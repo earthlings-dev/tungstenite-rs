@@ -783,9 +783,10 @@ impl WebSocketContext {
 
 fn check_max_size(size: usize, max_size: Option<usize>) -> crate::Result<()> {
     if let Some(max_size) = max_size
-        && size > max_size {
-            return Err(Error::Capacity(CapacityError::MessageTooLong { size, max_size }));
-        }
+        && size > max_size
+    {
+        return Err(Error::Capacity(CapacityError::MessageTooLong { size, max_size }));
+    }
     Ok(())
 }
 

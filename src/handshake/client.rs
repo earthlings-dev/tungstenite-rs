@@ -285,11 +285,12 @@ impl VerifyData {
 
         if let Some(returned_subprotocol) = headers.get("Sec-WebSocket-Protocol")
             && let Some(accepted_subprotocols) = &self.subprotocols
-                && !accepted_subprotocols.contains(&returned_subprotocol.to_str()?.to_string()) {
-                    return Err(Error::Protocol(ProtocolError::SecWebSocketSubProtocolError(
-                        SubProtocolError::InvalidSubProtocol,
-                    )));
-                }
+            && !accepted_subprotocols.contains(&returned_subprotocol.to_str()?.to_string())
+        {
+            return Err(Error::Protocol(ProtocolError::SecWebSocketSubProtocolError(
+                SubProtocolError::InvalidSubProtocol,
+            )));
+        }
 
         Ok(response)
     }
