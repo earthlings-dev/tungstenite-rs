@@ -2,12 +2,12 @@
 use std::io::{Read, Write};
 
 use crate::{
-    client::{client_with_config, uri_mode, IntoClientRequest},
+    ClientHandshake, Error, HandshakeError, Result, WebSocket,
+    client::{IntoClientRequest, client_with_config, uri_mode},
     error::UrlError,
     handshake::client::Response,
     protocol::WebSocketConfig,
     stream::MaybeTlsStream,
-    ClientHandshake, Error, HandshakeError, Result, WebSocket,
 };
 
 /// A connector that can be used when establishing connections, allowing to control whether
@@ -34,9 +34,9 @@ mod encryption {
         use std::io::{Read, Write};
 
         use crate::{
+            Error, Result,
             error::TlsError,
             stream::{MaybeTlsStream, Mode},
-            Error, Result,
         };
 
         pub fn wrap_stream<S>(
@@ -79,9 +79,9 @@ mod encryption {
         };
 
         use crate::{
+            Result,
             error::TlsError,
             stream::{MaybeTlsStream, Mode},
-            Result,
         };
 
         pub fn wrap_stream<S>(
@@ -124,7 +124,9 @@ mod encryption {
                                 let total_number = certs.len();
                                 let (number_added, number_ignored) =
                                     root_store.add_parsable_certificates(certs);
-                                log::debug!("Added {number_added}/{total_number} native root certificates (ignored {number_ignored})");
+                                log::debug!(
+                                    "Added {number_added}/{total_number} native root certificates (ignored {number_ignored})"
+                                );
                             }
                             #[cfg(feature = "rustls-tls-webpki-roots")]
                             {
@@ -154,9 +156,9 @@ mod encryption {
         use std::io::{Read, Write};
 
         use crate::{
+            Error, Result,
             error::UrlError,
             stream::{MaybeTlsStream, Mode},
-            Error, Result,
         };
 
         pub fn wrap_stream<S>(socket: S, mode: Mode) -> Result<MaybeTlsStream<S>>

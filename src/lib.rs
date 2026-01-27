@@ -37,17 +37,17 @@ type ReadBuffer = buffer::ReadBuffer<READ_BUFFER_CHUNK_SIZE>;
 
 pub use crate::{
     error::{Error, Result},
-    protocol::{frame::Utf8Bytes, Message, WebSocket},
+    protocol::{Message, WebSocket, frame::Utf8Bytes},
 };
 // re-export bytes since used in `Message` API.
 pub use bytes::Bytes;
 
 #[cfg(feature = "handshake")]
 pub use crate::{
-    client::{client, connect, ClientRequestBuilder},
-    handshake::{client::ClientHandshake, server::ServerHandshake, HandshakeError},
+    client::{ClientRequestBuilder, client, connect},
+    handshake::{HandshakeError, client::ClientHandshake, server::ServerHandshake},
     server::{accept, accept_hdr, accept_hdr_with_config, accept_with_config},
 };
 
 #[cfg(all(any(feature = "native-tls", feature = "__rustls-tls"), feature = "handshake"))]
-pub use tls::{client_tls, client_tls_with_config, Connector};
+pub use tls::{Connector, client_tls, client_tls_with_config};

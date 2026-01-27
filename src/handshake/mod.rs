@@ -41,7 +41,7 @@ impl<Role: HandshakeRole> MidHandshake<Role> {
         loop {
             mach = match mach.single_round()? {
                 RoundResult::WouldBlock(m) => {
-                    return Err(HandshakeError::Interrupted(MidHandshake { machine: m, ..self }))
+                    return Err(HandshakeError::Interrupted(MidHandshake { machine: m, ..self }));
                 }
                 RoundResult::Incomplete(m) => m,
                 RoundResult::StageFinished(s) => match self.role.stage_finished(s)? {

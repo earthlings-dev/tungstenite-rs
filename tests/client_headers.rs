@@ -8,9 +8,8 @@ use std::{
     time::Duration,
 };
 use tungstenite::{
-    accept_hdr, connect,
+    ClientRequestBuilder, Error, Message, accept_hdr, connect,
     handshake::server::{Request, Response},
-    ClientRequestBuilder, Error, Message,
 };
 
 /// Test for write buffering and flushing behaviour.

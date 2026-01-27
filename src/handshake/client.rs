@@ -6,16 +6,15 @@ use std::{
 };
 
 use http::{
-    header::HeaderName, HeaderMap, Request as HttpRequest, Response as HttpResponse, StatusCode,
+    HeaderMap, Request as HttpRequest, Response as HttpResponse, StatusCode, header::HeaderName,
 };
 use httparse::Status;
 use log::*;
 
 use super::{
-    derive_accept_key,
+    HandshakeRole, MidHandshake, ProcessingResult, derive_accept_key,
     headers::{FromHttparse, MAX_HEADERS},
     machine::{HandshakeMachine, StageResult, TryParse},
-    HandshakeRole, MidHandshake, ProcessingResult,
 };
 use crate::{
     error::{Error, ProtocolError, Result, SubProtocolError, UrlError},
@@ -284,15 +283,13 @@ impl VerifyData {
             )));
         }
 
-        if let Some(returned_subprotocol) = headers.get("Sec-WebSocket-Protocol") {
-            if let Some(accepted_subprotocols) = &self.subprotocols {
-                if !accepted_subprotocols.contains(&returned_subprotocol.to_str()?.to_string()) {
+        if let Some(returned_subprotocol) = headers.get("Sec-WebSocket-Protocol")
+            && let Some(accepted_subprotocols) = &self.subprotocols
+                && !accepted_subprotocols.contains(&returned_subprotocol.to_str()?.to_string()) {
                     return Err(Error::Protocol(ProtocolError::SecWebSocketSubProtocolError(
                         SubProtocolError::InvalidSubProtocol,
                     )));
                 }
-            }
-        }
 
         Ok(response)
     }
@@ -338,7 +335,7 @@ pub fn generate_key() -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::{super::machine::TryParse, generate_key, generate_request, Response};
+    use super::{super::machine::TryParse, Response, generate_key, generate_request};
     use crate::client::IntoClientRequest;
 
     #[test]

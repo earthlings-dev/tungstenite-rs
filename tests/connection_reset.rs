@@ -11,7 +11,7 @@ use std::{
 };
 
 use socket2::Socket;
-use tungstenite::{accept, connect, stream::MaybeTlsStream, Error, Message, WebSocket};
+use tungstenite::{Error, Message, WebSocket, accept, connect, stream::MaybeTlsStream};
 
 type Sock = WebSocket<MaybeTlsStream<TcpStream>>;
 

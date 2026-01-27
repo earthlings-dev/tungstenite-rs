@@ -13,9 +13,9 @@ pub use self::{
 };
 
 use crate::{
+    Message,
     error::{CapacityError, Error, ProtocolError, Result},
     protocol::frame::mask::apply_mask,
-    Message,
 };
 use bytes::BytesMut;
 use log::*;

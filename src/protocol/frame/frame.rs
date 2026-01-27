@@ -192,7 +192,7 @@ impl FrameHeader {
         // Disallow bad opcode
         match opcode {
             OpCode::Control(Control::Reserved(_)) | OpCode::Data(Data::Reserved(_)) => {
-                return Err(Error::Protocol(ProtocolError::InvalidOpcode(first & 0x0F)))
+                return Err(Error::Protocol(ProtocolError::InvalidOpcode(first & 0x0F)));
             }
             _ => (),
         }

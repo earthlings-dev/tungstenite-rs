@@ -8,8 +8,8 @@ pub use self::{frame::CloseFrame, message::Message};
 
 use self::{
     frame::{
-        coding::{CloseCode, Control as OpCtl, Data as OpData, OpCode},
         Frame, FrameCodec,
+        coding::{CloseCode, Control as OpCtl, Data as OpData, OpCode},
     },
     message::{IncompleteMessage, MessageType},
 };
@@ -774,7 +774,7 @@ impl WebSocketContext {
         let empty_or_pong = self
             .additional_send
             .as_ref()
-            .map_or(true, |f| f.header().opcode == OpCode::Control(OpCtl::Pong));
+            .is_none_or(|f| f.header().opcode == OpCode::Control(OpCtl::Pong));
         if empty_or_pong {
             self.additional_send.replace(add);
         }
@@ -782,11 +782,10 @@ impl WebSocketContext {
 }
 
 fn check_max_size(size: usize, max_size: Option<usize>) -> crate::Result<()> {
-    if let Some(max_size) = max_size {
-        if size > max_size {
+    if let Some(max_size) = max_size
+        && size > max_size {
             return Err(Error::Capacity(CapacityError::MessageTooLong { size, max_size }));
         }
-    }
     Ok(())
 }
 

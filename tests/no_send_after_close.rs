@@ -10,7 +10,7 @@ use std::{
     time::Duration,
 };
 
-use tungstenite::{accept, connect, error::ProtocolError, Error, Message};
+use tungstenite::{Error, Message, accept, connect, error::ProtocolError};
 
 #[test]
 #[cfg(feature = "handshake")]

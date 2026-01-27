@@ -10,7 +10,7 @@ use std::{
     time::Duration,
 };
 
-use tungstenite::{accept, connect, Error, Message};
+use tungstenite::{Error, Message, accept, connect};
 #[test]
 #[cfg(feature = "handshake")]
 fn test_receive_after_init_close() {

@@ -1,5 +1,5 @@
 use std::io::{self, Read, Write};
-use tungstenite::{protocol::WebSocketConfig, Message, WebSocket};
+use tungstenite::{Message, WebSocket, protocol::WebSocketConfig};
 
 /// `Write` impl that records call stats and drops the data.
 #[derive(Debug, Default)]

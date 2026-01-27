@@ -2,9 +2,9 @@
 
 use std::{io, result, str, string};
 
-use crate::protocol::{frame::coding::Data, Message};
+use crate::protocol::{Message, frame::coding::Data};
 #[cfg(feature = "handshake")]
-use http::{header::HeaderName, Response};
+use http::{Response, header::HeaderName};
 use thiserror::Error;
 
 /// Result type of all Tungstenite library calls.

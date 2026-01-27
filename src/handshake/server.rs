@@ -7,16 +7,15 @@ use std::{
 };
 
 use http::{
-    response::Builder, HeaderMap, Request as HttpRequest, Response as HttpResponse, StatusCode,
+    HeaderMap, Request as HttpRequest, Response as HttpResponse, StatusCode, response::Builder,
 };
 use httparse::Status;
 use log::*;
 
 use super::{
-    derive_accept_key,
+    HandshakeRole, MidHandshake, ProcessingResult, derive_accept_key,
     headers::{FromHttparse, MAX_HEADERS},
     machine::{HandshakeMachine, StageResult, TryParse},
-    HandshakeRole, MidHandshake, ProcessingResult,
 };
 use crate::{
     error::{Error, ProtocolError, Result},
@@ -294,7 +293,7 @@ impl<S: Read + Write, C: Callback> HandshakeRole for ServerHandshake<S, C> {
 
 #[cfg(test)]
 mod tests {
-    use super::{super::machine::TryParse, create_response, Request};
+    use super::{super::machine::TryParse, Request, create_response};
 
     #[test]
     fn request_parsing() {

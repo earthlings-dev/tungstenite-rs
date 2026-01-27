@@ -3,8 +3,8 @@
 pub use crate::handshake::server::ServerHandshake;
 
 use crate::handshake::{
-    server::{Callback, NoCallback},
     HandshakeError,
+    server::{Callback, NoCallback},
 };
 
 use crate::protocol::{WebSocket, WebSocketConfig};

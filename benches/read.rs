@@ -4,7 +4,7 @@ use std::{
     io::{self, Read, Write},
     sync::{Arc, Mutex},
 };
-use tungstenite::{protocol::Role, Message, WebSocket};
+use tungstenite::{Message, WebSocket, protocol::Role};
 
 /// Mock stream with no artificial delays.
 #[derive(Default, Clone)]

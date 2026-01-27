@@ -36,7 +36,7 @@ mod string_collect {
                     match result {
                         Ok(text) => self.data.push_str(text),
                         Err(result_bytes) => {
-                            return Err(Error::Utf8(String::from_utf8_lossy(result_bytes).into()))
+                            return Err(Error::Utf8(String::from_utf8_lossy(result_bytes).into()));
                         }
                     }
                 } else {

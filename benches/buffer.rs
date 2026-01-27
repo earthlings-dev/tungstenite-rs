@@ -1,7 +1,7 @@
 #![allow(clippy::incompatible_msrv)] // msrv doesn't apply to benches
 
 use bytes::Buf;
-use criterion::{criterion_group, criterion_main, Criterion, Throughput};
+use criterion::{Criterion, Throughput, criterion_group, criterion_main};
 use input_buffer::InputBuffer;
 use std::{
     hint::black_box,

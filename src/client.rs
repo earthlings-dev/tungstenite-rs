@@ -6,18 +6,18 @@ use std::{
     result::Result as StdResult,
 };
 
-use http::{request::Parts, HeaderName, Uri};
+use http::{HeaderName, Uri, request::Parts};
 use log::*;
 
 use crate::{
-    handshake::client::{generate_key, Request, Response},
+    handshake::client::{Request, Response, generate_key},
     protocol::WebSocketConfig,
     stream::MaybeTlsStream,
 };
 
 use crate::{
     error::{Error, Result, UrlError},
-    handshake::{client::ClientHandshake, HandshakeError},
+    handshake::{HandshakeError, client::ClientHandshake},
     protocol::WebSocket,
     stream::{Mode, NoDelay},
 };

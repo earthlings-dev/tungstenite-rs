@@ -4,7 +4,7 @@ use std::{
     hint, io,
     time::{Duration, Instant},
 };
-use tungstenite::{protocol::Role, Message, WebSocket};
+use tungstenite::{Message, WebSocket, protocol::Role};
 
 const MOCK_WRITE_LEN: usize = 8 * 1024 * 1024;
 

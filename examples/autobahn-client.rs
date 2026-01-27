@@ -1,6 +1,6 @@
 use log::*;
 
-use tungstenite::{connect, Error, Message, Result};
+use tungstenite::{Error, Message, Result, connect};
 
 const AGENT: &str = "Tungstenite";
 

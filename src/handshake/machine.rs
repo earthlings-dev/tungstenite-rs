@@ -5,9 +5,9 @@ use log::*;
 use std::io::{Cursor, Read, Write};
 
 use crate::{
+    ReadBuffer,
     error::{Error, ProtocolError, Result},
     util::NonBlockingResult,
-    ReadBuffer,
 };
 
 /// A generic handshake state machine.

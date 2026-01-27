@@ -2,12 +2,12 @@
 use bytes::Bytes;
 use criterion::{BatchSize, Criterion, Throughput};
 use rand::{
+    SeedableRng,
     distr::{Alphanumeric, SampleString},
     rngs::SmallRng,
-    SeedableRng,
 };
 use std::net::TcpListener;
-use tungstenite::{accept_hdr_with_config, protocol::WebSocketConfig, Message};
+use tungstenite::{Message, accept_hdr_with_config, protocol::WebSocketConfig};
 
 /// Binary message meaning "stop".
 const B_STOP: Bytes = Bytes::from_static(b"stop");
